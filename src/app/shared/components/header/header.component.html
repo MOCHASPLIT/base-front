@@ -156,89 +156,129 @@
                     </div>
                 </mat-menu>
             </li> -->
-            <!-- <li>
-                <button mat-icon-button [matMenuTriggerFor]="notificationsMenu" class="notifications-menu-btn p-0">
-                    <i class="material-symbols-outlined">
-                        notifications
-                    </i>
-                    <span class="daxa-badge">
-                        3
-                    </span>
+            <li>
+                <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="notificationsMenu"
+                    class="notifications-menu-btn p-0"
+                >
+                    <i class="material-symbols-outlined"> notifications </i>
+                    <span class="daxa-badge"> 1 </span>
                 </button>
-                <mat-menu class="notifications-menu-dropdown" #notificationsMenu="matMenu" xPosition="before">
+                <mat-menu
+                    class="notifications-menu-dropdown"
+                    #notificationsMenu="matMenu"
+                    xPosition="before"
+                >
                     <div
-                        [class.dark-menu]="themeService.isDark() || themeService.isHeaderDark()"
+                        [class.dark-menu]="
+                            themeService.isDark() || themeService.isHeaderDark()
+                        "
                     >
-                        <div class="title d-flex align-items-center justify-content-between">
+                        <div
+                            class="title d-flex align-items-center justify-content-between"
+                        >
                             <span class="fw-medium">
-                                Notifications
-                                <span class="text-body fw-normal">(03)</span>
+                                Notificaciones
+                                <span class="text-body fw-normal">(01)</span>
                             </span>
-                            <a routerLink="/notifications" class="link-btn text-daxa">
-                                Clear All
+                            <a
+                                routerLink="/notifications"
+                                class="link-btn text-daxa"
+                            >
+                                Limpiar todas
                             </a>
                         </div>
                         <ul class="menu-body pl-0 mt-0 list-unstyled">
-                            <li class="position-relative">
-                                <div class="icon rounded-circle position-absolute text-center transition">
+                            <!-- <li class="position-relative">
+                                <div
+                                    class="icon rounded-circle position-absolute text-center transition"
+                                >
                                     <i class="material-symbols-outlined">
                                         sms
                                     </i>
                                 </div>
                                 <span class="sub-title d-block">
-                                    You have requested to <strong class="fw-medium">withdrawal</strong>
+                                    You have requested to
+                                    <strong class="fw-medium"
+                                        >withdrawal</strong
+                                    >
                                 </span>
                                 <span class="time d-block text-body">
                                     2 hrs ago
                                 </span>
-                                <a routerLink="/notifications" class="d-block link-btn position-absolute"></a>
-                                <span class="unread d-inline-block rounded-circle bg-daxa position-absolute"></span>
-                            </li>
-                            <li class="position-relative">
-                                <div class="icon rounded-circle position-absolute text-center transition">
+                                <a
+                                    routerLink="/notifications"
+                                    class="d-block link-btn position-absolute"
+                                ></a>
+                                <span
+                                    class="unread d-inline-block rounded-circle bg-daxa position-absolute"
+                                ></span>
+                            </li> -->
+                            <!-- <li class="position-relative">
+                                <div
+                                    class="icon rounded-circle position-absolute text-center transition"
+                                >
                                     <i class="material-symbols-outlined">
                                         person
                                     </i>
                                 </div>
                                 <span class="sub-title d-block">
-                                    <strong class="fw-medium">A new user</strong> added in Daxa
+                                    <strong class="fw-medium"
+                                        >A new user</strong
+                                    >
+                                    added in Daxa
                                 </span>
                                 <span class="time d-block text-body">
                                     3 hrs ago
                                 </span>
-                                <a routerLink="/notifications" class="d-block link-btn position-absolute"></a>
-                                <span class="unread d-inline-block rounded-circle bg-daxa position-absolute"></span>
-                            </li>
+                                <a
+                                    routerLink="/notifications"
+                                    class="d-block link-btn position-absolute"
+                                ></a>
+                                <span
+                                    class="unread d-inline-block rounded-circle bg-daxa position-absolute"
+                                ></span>
+                            </li> -->
                             <li class="position-relative">
-                                <div class="icon rounded-circle position-absolute text-center transition">
+                                <div
+                                    class="icon rounded-circle position-absolute text-center transition"
+                                >
                                     <i class="material-symbols-outlined">
                                         mark_email_unread
                                     </i>
                                 </div>
                                 <span class="sub-title d-block">
-                                    You have requested to <strong class="fw-medium">withdrawal</strong>
+                                    Tienes una nueva solicitud de
+                                    <strong class="fw-medium">reserva</strong>
                                 </span>
                                 <span class="time d-block text-body">
-                                    1 day ago
+                                    Hace 2 horas
                                 </span>
-                                <a routerLink="/notifications" class="d-block link-btn position-absolute"></a>
+                                <a
+                                    routerLink="/notifications"
+                                    class="d-block link-btn position-absolute"
+                                ></a>
                             </li>
                         </ul>
                         <div class="menu-footer text-center">
-                            <a routerLink="/notifications" class="link-btn text-daxa d-inline-block fw-medium">
-                                See All Notifications
+                            <a
+                                routerLink="/notifications"
+                                class="link-btn text-daxa d-inline-block fw-medium"
+                            >
+                                Ver todas las notificaciones
                             </a>
                         </div>
                     </div>
                 </mat-menu>
-            </li> -->
+            </li>
             <li>
                 <button
                     mat-button
                     class="profile-menu-btn"
                     [matMenuTriggerFor]="profileMenu"
                 >
-                    <img src="assets/images/admin.png" alt="profile-image" />
+                    <img src="assets/images/admin1.png" alt="profile-image" />
                     <span
                         class="status d-inline-block rounded-circle position-absolute"
                     ></span>
@@ -255,7 +295,7 @@
                     >
                         <div class="menu-header d-flex align-items-center">
                             <img
-                                src="assets/images/admin.png"
+                                src="assets/images/admin1.png"
                                 alt="profile-image"
                             />
                             <div class="title">
@@ -263,10 +303,10 @@
                                     routerLink="/my-profile"
                                     class="d-inline-block fw-medium"
                                 >
-                                    Mateo Luca
+                                    Luis Zambrano
                                 </a>
                                 <span class="designation d-block text-body">
-                                    Admin
+                                    Supervisor
                                 </span>
                             </div>
                         </div>

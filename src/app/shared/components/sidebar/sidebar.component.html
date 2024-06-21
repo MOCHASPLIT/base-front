@@ -10,8 +10,8 @@
 >
     <div class="logo bg-white">
         <a routerLink="/" class="d-flex align-items-center">
-            <img src="assets/images/logo-icon.svg" alt="logo-icon" />
-            <span class="fw-semibold">Daxa</span>
+            <!-- <img src="assets/images/logo-icon.svg" alt="logo-icon" /> -->
+            <span class="fw-semibold">EduSphere</span>
         </a>
     </div>
     <div
@@ -95,7 +95,7 @@
                             </li>
                         </ul>
                     </mat-expansion-panel> -->
-                    <!-- <span class="sub-title text-body"> APPS </span> -->
+                    <span class="sub-title text-body"> PRINCIPAL </span>
                     <a
                         routerLink="/dashboard"
                         class="sidebar-menu-link"
@@ -104,6 +104,17 @@
                     >
                         <i class="material-symbols-outlined"> group </i>
                         <span class="title"> Tablero </span>
+                    </a>
+
+                    <span class="sub-title text-body"> FUNCIONES </span>
+                    <a
+                        routerLink="/educational-spaces"
+                        class="sidebar-menu-link"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <i class="material-symbols-outlined"> chat </i>
+                        <span class="title"> Mis espacios </span>
                     </a>
                     <a
                         routerLink="/users"
@@ -115,6 +126,26 @@
                         <span class="title"> Usuarios </span>
                     </a>
                     <a
+                        routerLink="/subjects"
+                        class="sidebar-menu-link"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <i class="material-symbols-outlined"> group </i>
+                        <span class="title"> Asignaturas </span>
+                    </a>
+
+                    <span class="sub-title text-body"> AYUDA </span>
+                    <a
+                        routerLink="/tutorials"
+                        class="sidebar-menu-link"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: true }"
+                    >
+                        <i class="material-symbols-outlined"> group </i>
+                        <span class="title"> Tutoriales </span>
+                    </a>
+                    <!-- <a
                         routerLink="/subjects"
                         class="sidebar-menu-link"
                         routerLinkActive="active"
@@ -144,17 +175,9 @@
                             perm_contact_calendar
                         </i>
                         <span class="title"> Edificios </span>
-                    </a>
-                    <a
-                        routerLink="/educational-spaces"
-                        class="sidebar-menu-link"
-                        routerLinkActive="active"
-                        [routerLinkActiveOptions]="{ exact: true }"
-                    >
-                        <i class="material-symbols-outlined"> chat </i>
-                        <span class="title"> Espacios Educativos </span>
-                    </a>
-                    <a
+                    </a> -->
+
+                    <!-- <a
                         routerLink="/materials"
                         class="sidebar-menu-link"
                         routerLinkActive="active"
@@ -171,7 +194,7 @@
                     >
                         <i class="material-symbols-outlined"> chat </i>
                         <span class="title"> Reservas </span>
-                    </a>
+                    </a> -->
 
                     <!-- <mat-expansion-panel
                         (opened)="panelOpenState = true"
@@ -1328,7 +1351,7 @@
                             </ul>
                         </mat-accordion>
                     </mat-expansion-panel> -->
-                    <a
+                    <!-- <a
                         routerLink="/authentication/logout"
                         class="sidebar-menu-link"
                         routerLinkActive="active"
@@ -1336,7 +1359,7 @@
                     >
                         <i class="material-symbols-outlined"> logout </i>
                         <span class="title">Logout</span>
-                    </a>
+                    </a> -->
                 </mat-accordion>
             </div>
         </div>

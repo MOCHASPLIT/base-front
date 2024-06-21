@@ -74,22 +74,5 @@ export class CalendarComponent {
         plugins: [dayGridPlugin],
     };
 
-    // isToggled
-    isToggled = false;
-
-    constructor(public themeService: CustomizerSettingsService) {
-        this.themeService.isToggled$.subscribe((isToggled) => {
-            this.isToggled = isToggled;
-        });
-    }
-
-    // Dark Mode
-    toggleTheme() {
-        this.themeService.toggleTheme();
-    }
-
-    // RTL Mode
-    toggleRTLEnabledTheme() {
-        this.themeService.toggleRTLEnabledTheme();
-    }
+    constructor(public themeService: CustomizerSettingsService) {}
 }

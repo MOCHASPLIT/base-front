@@ -249,6 +249,13 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./features/users/users.routes').then((m) => m.USERS_ROUTES),
     },
+    {
+        path: 'tutorials',
+        loadChildren: () =>
+            import('./features/tutorials/tutorials.routes').then(
+                (m) => m.TUTORIALS_ROUTES
+            ),
+    },
     // { path: '', component: EcommerceComponent },
     // { path: 'crm', component: CrmComponent },
     // { path: 'project-management', component: ProjectManagementComponent },

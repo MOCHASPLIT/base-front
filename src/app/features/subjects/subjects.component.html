@@ -2,22 +2,355 @@
 <div
     class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-between"
 >
-    <h5 class="mb-0">Subjects</h5>
+    <h5 class="mb-0">Asignaturas</h5>
+    <ol class="breadcrumb list-unstyled mt-0 mb-0 pl-0">
+        <li class="breadcrumb-item position-relative">
+            <a routerLink="/" class="d-inline-block position-relative">
+                <!-- <i class="ri-home-8-line"></i> -->
+                Funciones
+            </a>
+        </li>
+        <li class="breadcrumb-item position-relative">Asignaturas</li>
+    </ol>
 </div>
 
+<!-- Card -->
 <div class="row">
-    <div class="col-lg-4 col-md-6">
+    <!-- Table -->
+    <div class="col-lg-8">
         <mat-card
-            class="daxa-card mb-25 border-radius bg-white border-none d-block"
+            class="daxa-card splitter-card mb-20 border-radius bg-white border-none d-block"
         >
+            <!-- Header -->
+            <mat-card-header>
+                <mat-card-title>
+                    <button mat-button class="text-daxa p-0 h-auto">
+                        + Vincular asignatura
+                    </button>
+                </mat-card-title>
+
+                <mat-card-subtitle>
+                    <button
+                        type="button"
+                        mat-button
+                        class="card-header-menu-btn"
+                        [matMenuTriggerFor]="cardHeaderMenu"
+                    >
+                        Todos
+                    </button>
+                    <mat-menu
+                        #cardHeaderMenu="matMenu"
+                        class="card-header-menu"
+                        xPosition="before"
+                    >
+                        <button mat-menu-item>Todos</button>
+                        <button mat-menu-item>Activos</button>
+                        <button mat-menu-item>Inactivos</button>
+                    </mat-menu>
+                    <form class="search-box position-relative">
+                        <i class="material-symbols-outlined"> search </i>
+                        <input
+                            type="text"
+                            class="input-search d-block w-100 border-none outline-0"
+                            placeholder="Buscar usuario..."
+                            (keyup)="applyFilter($event)"
+                            #input
+                        />
+                    </form>
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <!-- Content -->
             <mat-card-content>
-                <h5 class="mb-10">Card subjects</h5>
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptates consectetur sunt beatae quaerat reiciendis,
-                    repellendus nam, ut numquam magnam nobis vel deserunt.
-                    Molestias suscipit nihil illo ducimus earum itaque saepe.
-                </p>
+                <div class="splitter-table">
+                    <div class="table-responsive">
+                        <table mat-table [dataSource]="dataSource">
+                            <!-- Checkbox Column -->
+                            <ng-container matColumnDef="select">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <mat-checkbox
+                                        (change)="
+                                            $event ? toggleAllRows() : null
+                                        "
+                                        [checked]="
+                                            selection.hasValue() &&
+                                            isAllSelected()
+                                        "
+                                        [indeterminate]="
+                                            selection.hasValue() &&
+                                            !isAllSelected()
+                                        "
+                                        [aria-label]="checkboxLabel()"
+                                    >
+                                    </mat-checkbox>
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <mat-checkbox
+                                        (click)="$event.stopPropagation()"
+                                        (change)="
+                                            $event
+                                                ? selection.toggle(row)
+                                                : null
+                                        "
+                                        [checked]="selection.isSelected(row)"
+                                        [aria-label]="checkboxLabel(row)"
+                                    >
+                                    </mat-checkbox>
+                                </td>
+                            </ng-container>
+
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    Identificador
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.id }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Subject Column -->
+                            <ng-container matColumnDef="subject">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    Asignatura
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.subject.name }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Career Column -->
+                            <ng-container matColumnDef="career">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    Carrera
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.career.name }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Period Column -->
+                            <ng-container matColumnDef="period">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    Periodo
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    {{ element.period }}
+                                </td>
+                            </ng-container>
+
+                            <!-- Status Column -->
+                            <ng-container matColumnDef="status">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    Estado
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <span
+                                        class="daxa-badge d-inline-block"
+                                        [ngClass]="
+                                            statusOptions[element.status].class
+                                        "
+                                    >
+                                        {{
+                                            statusOptions[element.status].label
+                                        }}
+                                    </span>
+                                </td>
+                            </ng-container>
+
+                            <!-- Action Column -->
+                            <ng-container matColumnDef="action">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    Acciones
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div class="action-info">
+                                        @for (item of element.action; track
+                                        $index) {
+
+                                        <button
+                                            type="button"
+                                            mat-button
+                                            [matTooltip]="item.label"
+                                            matTooltipPosition="above"
+                                        >
+                                            <i
+                                                class="material-symbols-outlined"
+                                            >
+                                                {{ item.name }}
+                                            </i>
+                                        </button>
+                                        }
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <!--  TR -->
+                            <tr
+                                mat-header-row
+                                *matHeaderRowDef="displayedColumns"
+                            ></tr>
+                            <tr
+                                mat-row
+                                *matRowDef="let row; columns: displayedColumns"
+                            ></tr>
+                        </table>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!-- Form -->
+    <div class="col-lg-4">
+        <mat-card
+            class="daxa-card mb-20 border-radius bg-white border-none d-block"
+        >
+            <mat-card-header>
+                <mat-card-title>
+                    <h5 class="mt-0 mb-0">Añadir una nueva asignatura</h5>
+                </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="advanced-form">
+                    <form
+                        [formGroup]="subjectForm"
+                        (ngSubmit)="onSubmitSubject()"
+                    >
+                        <div class="form-group mb-20">
+                            <label class="main-label d-block lh-1 text-black">
+                                Asignatura
+                            </label>
+                            <mat-form-field>
+                                <mat-label> Ingrese el nombre </mat-label>
+                                <input
+                                    matInput
+                                    type="text"
+                                    id="name"
+                                    formControlName="name"
+                                />
+                            </mat-form-field>
+                            @if (subjectForm.get('name')!.hasError('required')
+                            && subjectForm.get('name')!.touched) {
+                            <div class="error text-danger">
+                                El nombre es requerido.
+                            </div>
+                            }
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button
+                                mat-raised-button
+                                class="btn daxa"
+                                type="submit"
+                                [disabled]="subjectForm.invalid"
+                            >
+                                Registrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card
+            class="daxa-card mb-20 border-radius bg-white border-none d-block"
+        >
+            <mat-card-header>
+                <mat-card-title>
+                    <h5 class="mt-0 mb-0">Vincular una asignatura</h5>
+                </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="advanced-form">
+                    <form
+                        [formGroup]="careerSubjectForm"
+                        (ngSubmit)="onSubmitCareerSubject()"
+                    >
+                        <div class="form-group mb-20">
+                            <label class="main-label d-block lh-1 text-black">
+                                Periodo
+                            </label>
+                            <mat-form-field>
+                                <mat-label> Ingrese el periodo </mat-label>
+                                <input
+                                    matInput
+                                    type="text"
+                                    id="period"
+                                    formControlName="period"
+                                />
+                            </mat-form-field>
+                            @if
+                            (careerSubjectForm.get('period')!.hasError('required')
+                            && careerSubjectForm.get('period')!.touched) {
+                            <div class="error text-danger">
+                                El periodo es requerido.
+                            </div>
+                            }
+                        </div>
+
+                        <div class="form-group mb-20">
+                            <label class="main-label d-block lh-1 text-black">
+                                Asignatura
+                            </label>
+                            <mat-form-field>
+                                <mat-label>
+                                    Seleccione una asignatura
+                                </mat-label>
+                                <mat-select formControlName="subject">
+                                    @for (subject of subjects; track subject) {
+                                    <mat-option [value]="subject.value">
+                                        {{ subject.viewValue }}
+                                    </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                            @if
+                            (careerSubjectForm.get('subject')!.hasError('required')
+                            && careerSubjectForm.get('subject')!.touched) {
+                            <div class="error text-danger">
+                                La asignatura es requerido.
+                            </div>
+                            }
+                        </div>
+
+                        <div class="form-group mb-20">
+                            <label class="main-label d-block lh-1 text-black">
+                                Carrera
+                            </label>
+                            <mat-form-field>
+                                <mat-label> Seleccione una carrera </mat-label>
+                                <mat-select formControlName="career">
+                                    @for (career of careers; track career) {
+                                    <mat-option [value]="career.value">
+                                        {{ career.viewValue }}
+                                    </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                            @if
+                            (careerSubjectForm.get('subject')!.hasError('required')
+                            && careerSubjectForm.get('subject')!.touched) {
+                            <div class="error text-danger">
+                                La asignatura es requerido.
+                            </div>
+                            }
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button
+                                mat-raised-button
+                                class="btn daxa"
+                                type="submit"
+                                [disabled]="careerSubjectForm.invalid"
+                            >
+                                Registrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </mat-card-content>
         </mat-card>
     </div>

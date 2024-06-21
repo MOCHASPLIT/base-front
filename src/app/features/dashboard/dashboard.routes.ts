@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { CrmComponent } from '../../daxa/dashboard/crm/crm.component';
+import { DashboardComponent } from './dashboard.component';
 
 export const DASHBOARD_ROUTES: Routes = [
     {
         path: '',
-        component: CrmComponent,
+        component: DashboardComponent,
     },
 ];
